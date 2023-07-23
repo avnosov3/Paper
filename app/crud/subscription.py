@@ -41,5 +41,19 @@ class CRUDSubscription(CRUDBase):
         )
         return db_obj.unique().scalars().all()
 
+    async def get_subscription_by_user_id(
+        self,
+        user_id: int,
+        source_id: int,
+        session: AsyncSession,
+    ):
+        subscription = await session.scalars(
+            select(Subscription).where(
+                Subscription.source_id == source_id,
+                Subscription.user_id == user_id
+            )
+        )
+        return subscription.first()
+
 
 subscription_crud = CRUDSubscription(Subscription)

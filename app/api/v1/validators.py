@@ -65,3 +65,19 @@ async def check_user_exits(
             detail=constants.USER_NOT_FOUND.format(user_id)
         )
     return user
+
+
+async def check_subscription_exists(
+    source_id: int,
+    user_id: int,
+    session: AsyncSession
+):
+    subscription = await subscription_crud.get_subscription_by_user_id(
+        user_id, source_id, session
+    )
+    if subscription is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=constants.SUBSCRIPTION_NOT_FOUND
+        )
+    return subscription

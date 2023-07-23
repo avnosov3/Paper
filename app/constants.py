@@ -10,6 +10,8 @@ SOURCE_NOT_FOUND = 'Такого источника "{}" не существуе
 SOURCE_DELETED = 'Источник удален'
 
 SUBSCRIPTION_EXISTS = 'Вы уже подптсались на этот "{}" источник'
+SUBSCRIPTION_DELETED = 'Подписка удалена'
+SUBSCRIPTION_NOT_FOUND = 'Подписка не найдена'
 
 
 SOURCES_FILLED = 'Источники созданы'
