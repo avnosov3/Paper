@@ -3,3 +3,4 @@ PASSWORD_LEN_MESSAGE = (
     f'Длина пароля должна быть больше {MIN_PASSWORD_LEN} символов'
 )
 EMAIL_IN_PASSWORD = 'Пароль не должен содерждать email'
+SOURCE_ALREADY_EXISTS = 'Такой источник "{}" уже существует'
