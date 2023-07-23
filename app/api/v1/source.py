@@ -19,7 +19,7 @@ async def create_source(
         'title',
         source_in.title,
         source_crud,
-        constants.SOURCE_ALREADY_EXISTS.format(source_in),
+        constants.SOURCE_ALREADY_EXISTS.format(source_in.title),
         session
     )
     return await source_crud.create(source_in, session)
