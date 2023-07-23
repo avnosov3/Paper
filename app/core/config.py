@@ -14,6 +14,8 @@ class Settings(BaseSettings):
 
     DB_URL: PostgresDsn | None = None
 
+    FASTAPI_USERS_SECRET: str
+
     @validator('DB_URL', pre=True)
     def assemble_db_connection(cls, value, values):
         if isinstance(value, str):
