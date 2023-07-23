@@ -35,9 +35,12 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self,
         in_obj: CreateSchemaType,
         session: AsyncSession,
+        source_id=None,
         user: User | None = None,
     ) -> ModelType:
         in_obj_data = in_obj.dict()
+        if source_id is not None:
+            in_obj_data['source_id'] = source_id
         if user is not None:
             in_obj_data['user_id'] = user.id
         db_obj = self.model(**in_obj_data)
