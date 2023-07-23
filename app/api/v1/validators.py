@@ -1,7 +1,9 @@
 from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi_users.exceptions import UserNotExists
 
 from app.crud.subscription import subscription_crud
+from app.core.user import UserManager
 from app import constants
 
 
@@ -49,3 +51,17 @@ async def check_subscrtiption_made_again(
             status_code=status.HTTP_403_FORBIDDEN,
             detail=constants.SUBSCRIPTION_EXISTS.format(title)
         )
+
+
+async def check_user_exits(
+    user_id: int,
+    user_manager: UserManager
+):
+    try:
+        user = await user_manager.get(user_id)
+    except UserNotExists:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=constants.USER_NOT_FOUND.format(user_id)
+        )
+    return user
