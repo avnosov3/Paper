@@ -24,7 +24,7 @@ cd paper/
 
 ```
 DB_ENGINE=postgresql+asyncpg
-POSTGRES_DB=chief
+POSTGRES_DB=paper
 POSTGRES_USER=<Указать имя пользователя>
 POSTGRES_PASSWORD=<Указать пароль пользователя>
 DB_HOST=db
@@ -70,7 +70,7 @@ poetry install
 
 ```
 DB_ENGINE=postgresql+asyncpg
-POSTGRES_DB=chief
+POSTGRES_DB=paper
 POSTGRES_USER=<Указать имя пользователя>
 POSTGRES_PASSWORD=<Указать пароль пользователя>
 DB_HOST=localhost
