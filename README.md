@@ -101,5 +101,8 @@ poetry run uvicorn app.main:app
 * [swagger](http://127.0.0.1:8000/docs/)
 * [redoc](http://127.0.0.1:8000/redoc/)
 
-# Доступ к админке postgres (админка доступена только при работе через Docker)
+# Доступ к админке postgres
+
+Админка доступна только при работе через Docker
+
 * [adminer](http://127.0.0.1:8080/) 
