@@ -1,14 +1,18 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.db import get_async_session
-from app.crud.subscription import subscription_crud
-from app.schemas.subscription import SubscriptionCreateSchema
-from app.core.user import current_user
-from app.models.user import User
-from app.crud.source import source_crud
-from app.api.v1.validators import check_obj_exists, check_subscrtiption_made_again, check_subscription_exists
 from app import constants
+from app.api.v1.validators import (
+    check_obj_exists,
+    check_subscription_exists,
+    check_subscrtiption_made_again,
+)
+from app.core.db import get_async_session
+from app.core.user import current_user
+from app.crud.source import source_crud
+from app.crud.subscription import subscription_crud
+from app.models.user import User
+from app.schemas.subscription import SubscriptionCreateSchema
 
 subscription_router = APIRouter()
 

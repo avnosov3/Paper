@@ -3,13 +3,13 @@ from uuid import uuid1
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.db import get_async_session
 from app.api.v1.validators import check_user_exits
-from app.core.user import get_user_manager, UserManager
-from app.crud.subscription import subscription_crud
-from app.schemas.post import PostResponseSchema
-from app.schemas.digest import DigestCreateSchema
+from app.core.db import get_async_session
+from app.core.user import UserManager, get_user_manager
 from app.crud.digest import digest_crud
+from app.crud.subscription import subscription_crud
+from app.schemas.digest import DigestCreateSchema
+from app.schemas.post import PostResponseSchema
 
 digest_router = APIRouter()
 

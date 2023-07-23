@@ -1,10 +1,10 @@
 from fastapi import HTTPException, status
-from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi_users.exceptions import UserNotExists
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.crud.subscription import subscription_crud
-from app.core.user import UserManager
 from app import constants
+from app.core.user import UserManager
+from app.crud.subscription import subscription_crud
 
 
 async def check_obj_duplicate(

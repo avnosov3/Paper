@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.db import get_async_session
-from app.crud.source import source_crud
-from app.schemas.source import SourceCreateSchema, SourceEnum
 from app import constants
-from app.core.user import get_user_manager, UserManager
-from app.schemas.user import UserCreateSchema
-from app.models.subscription import Subscription
+from app.core.db import get_async_session
+from app.core.user import UserManager, get_user_manager
+from app.crud.source import source_crud
 from app.models.post import Post
+from app.models.subscription import Subscription
+from app.schemas.source import SourceCreateSchema, SourceEnum
+from app.schemas.user import UserCreateSchema
 
 auto_router = APIRouter()
 
