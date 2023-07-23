@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: postgres:14.0-alpine
+    volumes:
+      - paper_db:/var/lib/postgresql/data/
+    env_file:
+      - .env
+
+  paper:
+    image: avnosov/paper:v1
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8000:80"
+    env_file:
+      - .env
+
+  adminer:
+    image: adminer:4.8.1-standalone
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  paper_db:

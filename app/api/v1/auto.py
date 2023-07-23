@@ -14,7 +14,7 @@ auto_router = APIRouter()
 
 
 @auto_router.get('/fill-source')
-async def fill_db(
+async def fill_source(
     session: AsyncSession = Depends(get_async_session),
 ):
     for source in SourceEnum:
