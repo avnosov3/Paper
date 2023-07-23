@@ -7,6 +7,8 @@ USER_NOT_FOUND = 'Пользователь "{}" не найден'
 
 SOURCE_ALREADY_EXISTS = 'Такой источник "{}" уже существует'
 SOURCE_NOT_FOUND = 'Такого источника "{}" не существует'
+SOURCE_DELETED = 'Источник удален'
+
 SUBSCRIPTION_EXISTS = 'Вы уже подптсались на этот "{}" источник'
 
 

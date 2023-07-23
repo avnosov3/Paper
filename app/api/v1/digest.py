@@ -14,7 +14,7 @@ from app.crud.digest import digest_crud
 digest_router = APIRouter()
 
 
-@digest_router.post('/{user_id}')
+@digest_router.post('/{user_id}', response_model=list[PostResponseSchema])
 async def get_digest(
     user_id: int,
     likes_limits: int,

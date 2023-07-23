@@ -9,6 +9,9 @@ class Subscription(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     source_id = Column(Integer, ForeignKey('source.id'))
 
+    posts = relationship(
+        'Post', back_populates='subscription', cascade='delete'
+    )
+
     user = relationship('User', back_populates='subscriptions')
     source = relationship('Source', back_populates='subscriptions')
-    posts = relationship('Post', back_populates='subscription')
