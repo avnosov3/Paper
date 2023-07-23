@@ -12,3 +12,4 @@ class Post(Base):
 
     subscription = relationship('Subscription', back_populates='posts')
     source = relationship('Source', back_populates='posts')
+    digests = relationship('Digest', back_populates='posts')

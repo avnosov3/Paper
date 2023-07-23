@@ -11,3 +11,6 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     subscriptions = relationship(
         'Subscription', back_populates='user', cascade='delete'
     )
+    digests = relationship(
+        'Digest', back_populates='user', cascade='delete'
+    )
