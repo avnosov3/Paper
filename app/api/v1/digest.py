@@ -15,7 +15,7 @@ digest_router = APIRouter()
 
 
 @digest_router.post('/{user_id}', response_model=list[PostResponseSchema])
-async def get_digest(
+async def create_digest(
     user_id: int,
     likes_limits: int,
     session: AsyncSession = Depends(get_async_session),
@@ -43,3 +43,14 @@ async def get_digest(
                     user=user
                 )
     return results_out
+
+
+@digest_router.get('/{user_id}')
+async def get_all_generated_digests_for_user(
+    user_id: int,
+    session: AsyncSession = Depends(get_async_session),
+):
+    return await digest_crud.get_all_digests_for_user(
+        user_id,
+        session
+    )
