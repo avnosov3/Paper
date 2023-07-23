@@ -23,15 +23,3 @@ async def create_source(
         session
     )
     return await source_crud.create(source_in, session)
-
-
-@source_router.get('/fill-db-source')
-async def fill_db(
-    session: AsyncSession = Depends(get_async_session),
-):
-    for source in SourceEnum:
-        await source_crud.create(
-            SourceCreateSchema(title=source.value),
-            session
-        )
-    return dict(detail=constants.SOURCE_FILLED)
