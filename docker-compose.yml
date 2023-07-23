@@ -10,7 +10,7 @@ services:
       - .env
 
   paper:
-    image: avnosov/paper:v1
+    image: avnosov/paper:v2
     restart: always
     depends_on:
       - db
