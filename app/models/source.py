@@ -8,3 +8,4 @@ class Source(Base):
     title = Column(String(100), nullable=False, unique=True)
 
     subscriptions = relationship('Subscription', back_populates='source')
+    posts = relationship('Post', back_populates='source')

@@ -9,6 +9,7 @@ from app.core.user import get_user_manager, UserManager
 from app.schemas.user import UserCreateSchema
 from app.crud.subscription import subscription_crud
 from app.models.subscription import Subscription
+from app.models.post import Post
 
 auto_router = APIRouter()
 
@@ -62,3 +63,37 @@ async def fill_subscriptions(
         await session.commit()
         await session.refresh(subscription_db)
     return dict(detail=constants.SUBSCRIPTIONS_FILLED)
+
+
+@auto_router.get('/fill-posts')
+async def fill_posts(
+    session: AsyncSession = Depends(get_async_session),
+):
+    for text, likes, subscription_id, source_id in (
+        ('text 1 rbk', 10, 1, 1),
+        ('text 1 rbk', 10, 2, 1),
+        ('text 2 rbk', 20, 1, 1),
+        ('text 1 meduza', 15, 3, 2),
+        ('text 2 meduza', 12, 3, 2),
+        ('text 1 meduza', 15, 4, 2),
+        ('text 2 meduza', 12, 3, 2),
+        ('text 1 ovd_info', 99, 6, 3),
+        ('text 1 ovd_info', 99, 5, 3),
+        ('text 2 ovd_info', 1, 6, 3),
+        ('text 3 ovd_info', 11, 6, 3),
+        ('text 1 rt', 5, 7, 4),
+        ('text 1 rt', 5, 8, 4),
+        ('text 1 rt', 5, 9, 4),
+    ):
+        post_db = (
+            Post(
+                text=text,
+                likes=likes,
+                subscription_id=subscription_id,
+                source_id=source_id
+            )
+        )
+        session.add(post_db)
+        await session.commit()
+        await session.refresh(post_db)
+    return dict(detail=constants.POSTS_FILLED)
