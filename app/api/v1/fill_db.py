@@ -10,25 +10,21 @@ from app.models.subscription import Subscription
 from app.schemas.source import SourceCreateSchema, SourceEnum
 from app.schemas.user import UserCreateSchema
 
-auto_router = APIRouter()
+fill_db_router = APIRouter()
 
 
-@auto_router.get('/fill-source')
-async def fill_source(
+@fill_db_router.get('/fill-db')
+async def fill_db(
     session: AsyncSession = Depends(get_async_session),
+    user_manager: UserManager = Depends(get_user_manager),
 ):
+    # создаем источники
     for source in SourceEnum:
         await source_crud.create(
             SourceCreateSchema(title=source.value),
             session
         )
-    return dict(detail=constants.SOURCES_FILLED)
-
-
-@auto_router.get('/fill-user')
-async def fill_user(
-    user_manager: UserManager = Depends(get_user_manager)
-):
+    # return dict(detail=constants.SOURCES_FILLED)
     for email, password, name in (
         ('user@example.com', 'string', 'Anton'),
         ('1user@example.com', 'string', 'Egor'),
@@ -37,13 +33,8 @@ async def fill_user(
         await user_manager.create(
             UserCreateSchema(email=email, password=password, name=name)
         )
-    return dict(detail=constants.USERS_FILLED)
-
-
-@auto_router.get('/fill-subscriptions')
-async def fill_subscriptions(
-    session: AsyncSession = Depends(get_async_session),
-):
+    # return dict(detail=constants.USERS_FILLED)
+    # создаем подписки
     for title, user_id, source_id in (
         ('rbk', 1, 1),
         ('rbk', 2, 1),
@@ -61,13 +52,8 @@ async def fill_subscriptions(
         session.add(subscription_db)
         await session.commit()
         await session.refresh(subscription_db)
-    return dict(detail=constants.SUBSCRIPTIONS_FILLED)
-
-
-@auto_router.get('/fill-posts')
-async def fill_posts(
-    session: AsyncSession = Depends(get_async_session),
-):
+    # return dict(detail=constants.SUBSCRIPTIONS_FILLED)
+    # создаем посты
     for text, likes, subscription_id, source_id in (
         ('text 1 rbk', 10, 1, 1),
         ('text 1 rbk', 10, 2, 1),
@@ -95,4 +81,4 @@ async def fill_posts(
         session.add(post_db)
         await session.commit()
         await session.refresh(post_db)
-    return dict(detail=constants.POSTS_FILLED)
+    return dict(detail=constants.DB_FILLED)
