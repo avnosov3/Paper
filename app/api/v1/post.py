@@ -4,8 +4,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_async_session
 from app.crud.post import post_crud
 from app.schemas.post import PostCreateSchema
-from app.core.user import current_user
-from app.models.user import User
 from app.api.v1.validators import check_obj_exists
 from app.crud.source import source_crud
 from app import constants

@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_async_session
 from app.crud.source import source_crud
-from app.schemas.source import SourceCreateSchema, SourceEnum
+from app.schemas.source import SourceCreateSchema
 from app.api.v1.validators import check_obj_duplicate
 from app import constants
 

@@ -1,8 +1,10 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, and_
+from sqlalchemy import select
+from sqlalchemy.orm import joinedload
 
 from app.crud.base import CRUDBase
 from app.models.subscription import Subscription
+from app.models.post import Post
 
 
 class CRUDSubscription(CRUDBase):
@@ -24,6 +26,20 @@ class CRUDSubscription(CRUDBase):
             )
         )
         return subscription.first()
+
+    async def get_subscriptions_with_posts(
+        self,
+        user_id: int,
+        session: AsyncSession,
+    ):
+        db_obj = await session.execute(
+            select(Subscription).where(
+                Subscription.user_id == user_id
+            ).options(
+                joinedload(Subscription.posts).joinedload(Post.source)
+            )
+        )
+        return db_obj.unique().scalars().all()
 
 
 subscription_crud = CRUDSubscription(Subscription)

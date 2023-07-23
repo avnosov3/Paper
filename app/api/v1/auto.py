@@ -7,7 +7,6 @@ from app.schemas.source import SourceCreateSchema, SourceEnum
 from app import constants
 from app.core.user import get_user_manager, UserManager
 from app.schemas.user import UserCreateSchema
-from app.crud.subscription import subscription_crud
 from app.models.subscription import Subscription
 from app.models.post import Post
 

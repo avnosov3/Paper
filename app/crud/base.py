@@ -1,5 +1,4 @@
 from typing import Generic, List, Optional, Type, TypeVar
-from uuid import UUID
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
@@ -22,7 +21,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     async def get(
         self,
-        obj_id: UUID,
+        obj_id: int,
         session: AsyncSession
     ) -> Optional[ModelType]:
         return await session.get(self.model, obj_id)
@@ -36,9 +35,12 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         in_obj: CreateSchemaType,
         session: AsyncSession,
         source_id=None,
+        post_id=None,
         user: User | None = None,
     ) -> ModelType:
         in_obj_data = in_obj.dict()
+        if post_id is not None:
+            in_obj_data['post_id'] = post_id
         if source_id is not None:
             in_obj_data['source_id'] = source_id
         if user is not None:
@@ -99,7 +101,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
     async def get_related_obj_by_id(
         self,
-        obj_id: UUID,
+        obj_id: int,
         related_obj: str,
         session: AsyncSession
     ):

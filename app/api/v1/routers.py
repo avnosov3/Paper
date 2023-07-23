@@ -4,6 +4,7 @@ from app.api.v1.subscription import subscription_router
 from app.api.v1.source import source_router
 from app.api.v1.auto import auto_router
 from app.api.v1.post import post_router
+from app.api.v1.digest import digest_router
 
 api_router_v1 = APIRouter(prefix='/api/v1')
 api_router_v1.include_router(
@@ -17,4 +18,7 @@ api_router_v1.include_router(
 )
 api_router_v1.include_router(
     post_router, prefix='/post', tags=['Posts']
+)
+api_router_v1.include_router(
+    digest_router, prefix='/digest', tags=['Digests']
 )
