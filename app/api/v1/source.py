@@ -12,17 +12,26 @@ source_router = APIRouter()
 
 @source_router.post('/')
 async def create_source(
-    source_in: SourceEnum,
+    source_in: SourceCreateSchema,
     session: AsyncSession = Depends(get_async_session),
 ):
     await check_obj_duplicate(
         'title',
-        source_in,
+        source_in.title,
         source_crud,
         constants.SOURCE_ALREADY_EXISTS.format(source_in),
         session
     )
-    return await source_crud.create(
-        SourceCreateSchema(title=source_in),
-        session
-    )
+    return await source_crud.create(source_in, session)
+
+
+@source_router.get('/fill-db-source')
+async def fill_db(
+    session: AsyncSession = Depends(get_async_session),
+):
+    for source in SourceEnum:
+        await source_crud.create(
+            SourceCreateSchema(title=source.value),
+            session
+        )
+    return dict(detail=constants.SOURCE_FILLED)

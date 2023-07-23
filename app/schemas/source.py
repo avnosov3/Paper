@@ -11,4 +11,4 @@ class SourceEnum(str, Enum):
 
 
 class SourceCreateSchema(BaseModel):
-    title: SourceEnum
+    title: str
